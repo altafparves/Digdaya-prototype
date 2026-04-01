@@ -8,10 +8,10 @@ export const Topbar = () => {
       <div className="flex items-center gap-8">
         <span className="text-xl font-extrabold text-primary tracking-tight font-manrope">Food Supply Intelligence</span>
         <nav className="hidden xl:flex items-center gap-6 font-manrope text-sm font-semibold tracking-tight">
-          <Link to="/" className="text-on-surface-variant pb-2 hover:text-primary transition-colors">Global View</Link>
-          <Link to="/" className="text-primary border-b-2 border-primary pb-2">Commodities</Link>
-          <Link to="/" className="text-on-surface-variant pb-2 hover:text-primary transition-colors">Forecasting</Link>
-          <Link to="/" className="text-on-surface-variant pb-2 hover:text-primary transition-colors">Logistics</Link>
+          <Link to="/" className="text-on-surface-variant pb-2 hover:text-primary transition-colors">Overview</Link>
+          <Link to="/" className="text-primary border-b-2 border-primary pb-2">Komoditas</Link>
+          <Link to="/" className="text-on-surface-variant pb-2 hover:text-primary transition-colors">Forecast</Link>
+          <Link to="/" className="text-on-surface-variant pb-2 hover:text-primary transition-colors">Distribusi</Link>
         </nav>
       </div>
       

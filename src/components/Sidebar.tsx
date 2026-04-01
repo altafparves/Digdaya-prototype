@@ -9,26 +9,31 @@ export const Sidebar = () => {
     switch (role) {
       case 'regulator':
         return [
-          { icon: 'dashboard', label: 'Overview', path: '/regulator' },
-          { icon: 'account_tree', label: 'Supply Chain', path: '/regulator-supply' },
-          { icon: 'gavel', label: 'Regulatory Compliance', path: '/compliance' },
-          { icon: 'trending_up', label: 'Market Trends', path: '/trends' },
-          { icon: 'inventory_2', label: 'Inventory Reserve', path: '/reserve' },
-          { icon: 'warning', label: 'Risk Assessment', path: '/risk' },
+          { icon: 'dashboard', label: 'Dashboard Nasional', path: '/regulator' },
+          { icon: 'map', label: 'Peta Supply-Demand', path: '/regulator-supply' },
+          { icon: 'trending_up', label: 'Forecast Harga', path: '/trends' },
+          { icon: 'warning', label: 'Peringatan Inflasi', path: '/inflation' },
+          { icon: 'inventory_2', label: 'Cadangan Pangan', path: '/reserve' },
+          { icon: 'local_shipping', label: 'Distribusi Antarwilayah', path: '/distribution' },
+          { icon: 'description', label: 'Laporan', path: '/reports' },
         ];
       case 'farmer':
         return [
-          { icon: 'dashboard', label: 'Overview', path: '/farmer' },
-          { icon: 'inventory_2', label: 'My Supply', path: '/my-supply' },
-          { icon: 'handshake', label: 'Buyers Network', path: '/buyers' },
-          { icon: 'payments', label: 'Contracts', path: '/contracts' },
+          { icon: 'dashboard', label: 'Dashboard', path: '/farmer' },
+          { icon: 'inventory_2', label: 'Pasokan Saya', path: '/my-supply' },
+          { icon: 'insights', label: 'Insight Harga', path: '/insights' },
+          { icon: 'handshake', label: 'Permintaan Buyer', path: '/buyer-requests' },
+          { icon: 'history', label: 'Riwayat Distribusi', path: '/history' },
+          { icon: 'description', label: 'Laporan', path: '/reports' },
         ];
       case 'buyer':
         return [
-          { icon: 'dashboard', label: 'Overview', path: '/buyer' },
-          { icon: 'track_changes', label: 'Procurement', path: '/procurement' },
-          { icon: 'lan', label: 'Liquidity Pools', path: '/pools' },
-          { icon: 'handshake', label: 'Suppliers', path: '/suppliers' },
+          { icon: 'dashboard', label: 'Dashboard', path: '/buyer' },
+          { icon: 'shopping_cart', label: 'Pengadaan', path: '/procurement' },
+          { icon: 'handshake', label: 'Jaringan Supplier', path: '/suppliers' },
+          { icon: 'trending_up', label: 'Forecast Harga', path: '/trends' },
+          { icon: 'history', label: 'Riwayat Order', path: '/history' },
+          { icon: 'description', label: 'Laporan', path: '/reports' },
         ];
     }
   };
@@ -75,9 +80,6 @@ export const Sidebar = () => {
       </nav>
 
       <div className="px-4 mt-auto space-y-1.5 pt-6 border-t border-outline-variant/15 mx-4">
-        <button className="w-full mb-4 bg-primary text-surface-lowest py-3 rounded-md font-manrope font-bold text-xs shadow-md hover:bg-primary-container transition-all active:scale-95">
-          Generate Report
-        </button>
         <Link to="/help" className="flex items-center gap-3 text-on-surface-variant hover:bg-surface-high hover:text-on-surface px-3 py-2 rounded-lg transition-all group">
           <span className="material-symbols-outlined text-[18px] opacity-80 group-hover:opacity-100">help</span>
           <span className="font-inter text-xs font-bold">Help Center</span>
