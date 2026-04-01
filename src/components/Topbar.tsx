@@ -26,7 +26,7 @@ export const Topbar = () => {
           >
             <option value="regulator">Regulator</option>
             <option value="farmer">Farmer / Producer</option>
-            <option value="buyer">Buyer / Distributer</option>
+            <option value="buyer">Buyer / Distributor</option>
           </select>
         </div>
 

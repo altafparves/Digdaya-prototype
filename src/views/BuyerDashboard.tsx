@@ -1,221 +1,228 @@
+import React, { useState } from 'react';
 
+const mockSuppliers = [
+  { id: 1, name: "Koperasi Tani Makmur", verified: true, loc: "Surabaya, Jawa Timur", qty: 850, price: 12800, rating: 4.8 },
+  { id: 2, name: "CV Sumber Pangan", verified: true, loc: "Medan, Sumatera Utara", qty: 620, price: 13100, rating: 4.6 },
+  { id: 3, name: "Kelompok Tani Sejahtera", verified: false, loc: "Makassar, Sulawesi Selatan", qty: 450, price: 12500, rating: 4.5 },
+  { id: 4, name: "PT Agro Sentosa", verified: true, loc: "Bandung, Jawa Barat", qty: 1200, price: 13300, rating: 4.9 },
+];
 
 export const BuyerDashboard = () => {
+  const [quantity, setQuantity] = useState<string>('');
+  
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuantity(e.target.value);
+  };
+
+  const parsedQty = parseInt(quantity) || 0;
+  const avgPrice = 13000;
+  const totalEstimate = parsedQty * avgPrice;
+
   return (
     <div className="flex flex-col gap-8 animate-in fade-in duration-300">
       
-      {/* Hero Sourcing Section */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      {/* Header */}
+      <div>
+        <h1 className="text-xl font-bold text-gray-900 font-manrope">Dasbor Pembeli / Distributor</h1>
+        <p className="text-sm text-gray-500 mt-1 font-inter">Temukan pasokan tersedia dan hubungi pemasok</p>
+      </div>
+
+      <div className="flex flex-col lg:flex-row gap-6 items-start">
         
-        {/* Input Panel */}
-        <div className="lg:col-span-4 bg-surface-lowest p-6 rounded-xl shadow-[0_4px_24px_rgba(24,28,32,0.04)] border border-outline-variant/15">
-          <h2 className="text-on-surface text-lg font-manrope font-bold mb-6 flex items-center gap-2">
-            <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>track_changes</span>
-            Procurement Request
-          </h2>
-          <form className="space-y-5">
-            <div className="space-y-2">
-              <label className="text-xs font-semibold font-inter text-on-surface-variant uppercase tracking-wider">Commodity Needed</label>
-              <select className="w-full bg-surface-low border border-outline-variant/30 rounded-lg py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all">
-                <option>Hard Red Winter Wheat</option>
-                <option>Yellow Corn No. 2</option>
-                <option>Organic Soybeans</option>
-                <option>Long Grain Rice</option>
-              </select>
-            </div>
-            <div className="space-y-2">
-              <label className="text-xs font-semibold font-inter text-on-surface-variant uppercase tracking-wider">Quantity (Metric Tons)</label>
-              <div className="relative">
-                <input className="w-full bg-surface-low border border-outline-variant/30 rounded-lg py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all" type="number" defaultValue="1200" />
-                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold font-inter text-outline">MT</span>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <label className="text-xs font-semibold font-inter text-on-surface-variant uppercase tracking-wider">Target Location</label>
-              <div className="flex items-center bg-surface-low border border-outline-variant/30 rounded-lg px-4 focus-within:ring-2 focus-within:ring-primary/20 transition-all">
-                <span className="material-symbols-outlined text-outline text-lg">location_on</span>
-                <input className="w-full bg-transparent border-none py-3 px-2 text-sm font-medium focus:outline-none" placeholder="Port of Rotterdam, NL" type="text" />
-              </div>
-            </div>
-            <button type="button" className="w-full mt-2 bg-gradient-to-r from-primary to-primary-container text-surface-lowest py-4 rounded-lg font-bold font-manrope shadow-lg shadow-primary/20 hover:scale-[0.98] transition-transform flex items-center justify-center gap-2">
-              <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>analytics</span>
-              Analyze Supply Network
-            </button>
-          </form>
-        </div>
-        
-        {/* Procurement Price & Insights */}
-        <div className="lg:col-span-8 flex flex-col gap-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
-            
-            {/* Metric Card 1 */}
-            <div className="bg-surface-high p-8 rounded-xl flex flex-col justify-between border border-outline-variant/15">
-              <div>
-                <span className="text-xs font-bold text-on-secondary-container font-inter uppercase tracking-widest">Est. Procurement Price</span>
-                <div className="text-4xl font-manrope font-extrabold text-primary mt-2">€342,800.00</div>
-                <div className="flex items-center mt-2 text-tertiary font-semibold text-sm">
-                  <span className="material-symbols-outlined text-sm mr-1">trending_up</span>
-                  +4.2% from last quarter
+        {/* Left Column */}
+        <div className="w-full lg:w-1/3 flex flex-col gap-6">
+          
+          {/* Purchase Requirements */}
+          <div className="bg-white p-6 rounded-[20px] border border-gray-100 shadow-sm">
+            <h2 className="text-[15px] font-bold text-gray-900 mb-6 font-manrope">Kebutuhan Pembelian</h2>
+            <form className="space-y-5">
+              <div className="space-y-2">
+                <label className="text-[13px] font-semibold text-gray-700 font-inter">Komoditas yang Dibutuhkan</label>
+                <div className="relative">
+                  <select className="w-full bg-[#F4F4F5] border-none rounded-lg py-3 px-4 text-[13px] font-inter focus:ring-2 focus:ring-blue-600/20 outline-none appearance-none text-gray-900 font-medium">
+                    <option>Cabai</option>
+                    <option>Beras</option>
+                    <option>Jagung</option>
+                  </select>
+                  <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-lg">expand_more</span>
                 </div>
               </div>
-              <div className="mt-8">
-                <p className="text-xs font-inter text-on-surface-variant leading-relaxed font-medium">Price calculation based on current market trends, logistics from Eastern Europe, and seasonal demand spikes.</p>
+              
+              <div className="space-y-2">
+                <label className="text-[13px] font-semibold text-gray-700 font-inter">Kebutuhan Kuantitas (kg)</label>
+                <input 
+                  type="number" 
+                  placeholder="Masukkan kuantitas" 
+                  value={quantity}
+                  onChange={handleQuantityChange}
+                  className="w-full bg-[#F4F4F5] border-none rounded-lg py-3 px-4 text-[13px] font-inter focus:ring-2 focus:ring-blue-600/20 outline-none text-gray-900 font-medium placeholder:text-gray-400"
+                />
               </div>
-            </div>
-            
-            {/* Metric Card 2 */}
-            <div className="relative overflow-hidden bg-primary text-surface-lowest p-8 rounded-xl flex flex-col justify-between shadow-xl">
-              <div className="absolute -right-10 -bottom-10 opacity-10">
-                <span className="material-symbols-outlined text-[160px]" style={{ fontVariationSettings: "'FILL' 1" }}>verified_user</span>
-              </div>
-              <div>
-                <span className="text-xs font-bold font-inter opacity-80 uppercase tracking-widest">Supply Confidence Index</span>
-                <div className="text-4xl font-manrope font-extrabold mt-2">94%</div>
-                <div className="flex items-center mt-2 text-secondary-fixed-dim font-semibold font-inter text-sm">
-                  <span className="material-symbols-outlined text-sm mr-1" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-                  High Liquidity Verified
+
+              <div className="space-y-2">
+                <label className="text-[13px] font-semibold text-gray-700 font-inter">Lokasi Pengiriman</label>
+                <div className="relative">
+                  <select className="w-full bg-[#F4F4F5] border-none rounded-lg py-3 px-4 text-[13px] font-inter focus:ring-2 focus:ring-blue-600/20 outline-none appearance-none text-gray-900 font-medium">
+                    <option>Jawa Tengah</option>
+                    <option>Jawa Barat</option>
+                    <option>Jawa Timur</option>
+                  </select>
+                  <span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-lg">expand_more</span>
                 </div>
               </div>
-              <div className="mt-8 z-10">
-                <button className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-xs font-bold font-inter backdrop-blur-md transition-colors">
-                  View Risk Breakdown
+
+              <div className="pt-2 flex gap-3">
+                <button type="button" className="flex-1 bg-[#1A56DB] hover:bg-blue-700 text-white py-2.5 rounded-lg text-sm font-bold font-inter transition-colors">
+                  Find Suppliers
+                </button>
+                <button type="button" onClick={() => setQuantity('')} className="px-6 bg-white border border-gray-200 hover:bg-gray-50 text-gray-800 py-2.5 rounded-lg text-sm font-bold font-inter transition-colors">
+                  Reset
                 </button>
               </div>
+            </form>
+          </div>
+
+          {/* Estimated Price */}
+          <div className="bg-[#F0FDF4] p-6 rounded-[20px] shadow-sm relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-100/40 to-cyan-100/40 blur-3xl rounded-full -mr-10 -mt-10"></div>
+            
+            <div className="flex items-center gap-2 mb-4 text-[#1A56DB] relative z-10">
+              <span className="material-symbols-outlined text-lg">show_chart</span>
+              <h3 className="font-bold text-[15px] font-manrope">Estimasi Harga</h3>
             </div>
             
-          </div>
-        </div>
-      </section>
+            <div className="mb-8 relative z-10">
+              <div className="text-3xl font-extrabold text-[#1A56DB] font-manrope tracking-tight">Rp 13.000/kg</div>
+              <p className="text-[13px] text-[#1A56DB]/70 mt-1 font-inter font-medium">Rata-rata pasar untuk wilayah Anda</p>
+            </div>
 
-      {/* Supply List & Recommended Suppliers */}
-      <section className="space-y-6">
-        <div className="flex justify-between items-end">
-          <h2 className="text-2xl font-manrope font-extrabold text-on-surface tracking-tight">Supply Intelligence Feed</h2>
-          <div className="flex gap-2">
-            <button className="p-2 bg-surface-lowest hover:bg-surface-low border border-outline-variant/20 rounded-md transition-colors text-on-surface-variant">
-              <span className="material-symbols-outlined text-xl">filter_list</span>
-            </button>
-            <button className="p-2 bg-surface-lowest hover:bg-surface-low border border-outline-variant/20 rounded-md transition-colors text-on-surface-variant">
-              <span className="material-symbols-outlined text-xl">download</span>
-            </button>
+            <div className="space-y-3 border-t border-[#1A56DB]/10 pt-5 relative z-10">
+              <div className="flex justify-between items-center">
+                <span className="text-[13px] text-[#1A56DB]/80 font-medium font-inter">Total estimasi:</span>
+                <span className="text-[13px] font-bold text-[#1A56DB] font-inter">Rp {totalEstimate.toLocaleString('id-ID')}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-[13px] text-[#1A56DB]/80 font-medium font-inter">Pemasok ditemukan:</span>
+                <span className="text-[13px] font-bold text-[#1A56DB] font-inter">{mockSuppliers.length}</span>
+              </div>
+            </div>
           </div>
         </div>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+        {/* Right Column */}
+        <div className="w-full lg:w-2/3 flex flex-col gap-6">
           
-          {/* Supply List Table */}
-          <div className="lg:col-span-8 bg-surface-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/15">
-            <div className="p-4 bg-surface-high flex justify-between items-center border-b border-outline-variant/15">
-              <span className="text-xs font-bold uppercase font-inter text-on-surface-variant tracking-widest">Regional Liquidity Pool</span>
-              <span className="text-xs font-medium font-inter text-on-surface-variant">Last updated: 14:02 GMT</span>
+          {/* Available Supply Table */}
+          <div className="bg-white rounded-[20px] shadow-sm overflow-hidden flex flex-col border border-gray-100/50">
+            <div className="px-6 py-5 border-b border-gray-100/80">
+              <h2 className="text-[15px] font-bold text-gray-900 font-manrope">Pasokan Tersedia</h2>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="text-on-surface-variant font-inter border-b border-outline-variant/15 bg-surface-low/50">
-                    <th className="px-6 py-4 font-bold text-xs uppercase tracking-wide">Region / Hub</th>
-                    <th className="px-6 py-4 font-bold text-xs uppercase tracking-wide text-right">Unit Price</th>
-                    <th className="px-6 py-4 font-bold text-xs uppercase tracking-wide text-right">Available Vol</th>
-                    <th className="px-6 py-4 font-bold text-xs uppercase tracking-wide">Status</th>
-                    <th className="px-6 py-4"></th>
+                  <tr className="border-b border-gray-100/80">
+                    <th className="px-6 py-3.5 text-[12px] font-bold text-gray-900 bg-white font-inter">Pemasok</th>
+                    <th className="px-6 py-3.5 text-[12px] font-bold text-gray-900 bg-white font-inter">Lokasi</th>
+                    <th className="px-6 py-3.5 text-[12px] font-bold text-gray-900 bg-white font-inter">Kuantitas</th>
+                    <th className="px-6 py-3.5 text-[12px] font-bold text-gray-900 bg-white font-inter">Harga</th>
+                    <th className="px-6 py-3.5 text-[12px] font-bold text-gray-900 bg-white font-inter text-center">Peringkat</th>
+                    <th className="px-6 py-3.5 text-[12px] font-bold text-gray-900 bg-white font-inter text-center">Aksi</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-outline-variant/10">
-                  
-                  {/* Row 1 */}
-                  <tr className="hover:bg-surface-bright transition-colors group">
-                    <td className="px-6 py-5">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded bg-surface-low border border-outline-variant/20 flex items-center justify-center">
-                          <span className="material-symbols-outlined text-secondary text-lg">lan</span>
+                <tbody className="divide-y divide-gray-50/80">
+                  {mockSuppliers.map((supplier) => (
+                    <tr key={supplier.id} className="hover:bg-gray-50/50 transition-colors">
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[13px] font-bold text-gray-800 font-inter">{supplier.name}</span>
+                          {supplier.verified && (
+                            <div className="bg-[#DCFCE7] text-[#166534] w-[18px] h-[18px] rounded flex items-center justify-center">
+                              <span className="material-symbols-outlined text-[12px] font-bold">check</span>
+                            </div>
+                          )}
                         </div>
-                        <div>
-                          <div className="text-sm font-bold font-inter text-on-surface">Black Sea Region</div>
-                          <div className="text-[10px] font-inter font-medium text-on-surface-variant">Port of Odesa Terminal</div>
+                      </td>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-1.5 text-gray-500">
+                          <span className="material-symbols-outlined text-[14px]">location_on</span>
+                          <span className="text-[12px] font-medium font-inter">{supplier.loc}</span>
                         </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-5 text-sm font-inter font-medium text-right">€285.50 / MT</td>
-                    <td className="px-6 py-5 text-sm font-inter font-bold text-right">4,500 MT</td>
-                    <td className="px-6 py-5">
-                      <span className="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-inter text-[10px] font-bold uppercase tracking-wide border border-secondary-container/50">Surplus</span>
-                    </td>
-                    <td className="px-6 py-5 text-right">
-                      <button className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                        <span className="material-symbols-outlined">chevron_right</span>
-                      </button>
-                    </td>
-                  </tr>
-
-                  {/* Row 2 */}
-                  <tr className="hover:bg-surface-bright transition-colors group">
-                    <td className="px-6 py-5">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded bg-surface-low border border-outline-variant/20 flex items-center justify-center">
-                          <span className="material-symbols-outlined text-secondary text-lg">lan</span>
+                      </td>
+                      <td className="px-6 py-4 text-[13px] font-bold text-gray-900 font-inter">{supplier.qty} kg</td>
+                      <td className="px-6 py-4 text-[13px] font-bold text-gray-900 font-inter">Rp {supplier.price.toLocaleString('id-ID')}/kg</td>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center justify-center gap-1">
+                          <span className="material-symbols-outlined text-[14px] text-[#EAB308]" style={{fontVariationSettings: "'FILL' 1"}}>star</span>
+                          <span className="text-[13px] font-bold text-gray-900 font-inter">{supplier.rating}</span>
                         </div>
-                        <div>
-                          <div className="text-sm font-bold font-inter text-on-surface">São Paulo, BR</div>
-                          <div className="text-[10px] font-inter font-medium text-on-surface-variant">Santos Export Terminal</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-5 text-sm font-inter font-medium text-right">€305.80 / MT</td>
-                    <td className="px-6 py-5 text-sm font-inter font-bold text-right">800 MT</td>
-                    <td className="px-6 py-5">
-                      <span className="px-2.5 py-1 rounded-full bg-[#ffdad6] text-[#93000a] font-inter text-[10px] font-bold uppercase tracking-wide border border-[#ffdad6]/50">Shortage</span>
-                    </td>
-                    <td className="px-6 py-5 text-right">
-                      <button className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                        <span className="material-symbols-outlined">chevron_right</span>
-                      </button>
-                    </td>
-                  </tr>
-                  
+                      </td>
+                      <td className="px-6 py-4 text-center">
+                        <button className="text-[12px] font-bold text-gray-800 bg-white border border-gray-200 hover:bg-gray-50 px-4 py-1.5 rounded-md transition-colors font-inter">
+                          Contact
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
           </div>
 
-          {/* Recommended Suppliers List */}
-          <div className="lg:col-span-4 space-y-6">
-            <div className="bg-surface-low p-6 rounded-xl border border-outline-variant/15 shadow-[0_4px_24px_rgba(24,28,32,0.02)]">
-              <h3 className="text-sm font-inter font-extrabold uppercase tracking-widest text-on-surface-variant mb-6">Top Ranked Suppliers</h3>
+          {/* Recommended Suppliers List Grid */}
+          <div className="mt-2">
+            <h2 className="text-[15px] font-bold text-gray-900 mb-4 font-manrope">Rekomendasi Pemasok</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               
-              <div className="space-y-4">
+              {mockSuppliers.slice(0, 2).map((supplier) => {
+                const estSupplierTotal = parsedQty > 0 ? parsedQty * supplier.price : 0;
                 
-                {/* Supplier Card */}
-                <div className="bg-surface-lowest p-5 rounded-lg border border-primary/20 shadow-sm relative group overflow-hidden">
-                  <div className="absolute top-0 right-0 py-1 px-2.5 bg-primary/10 border-b border-l border-primary/20 rounded-bl-lg">
-                    <span className="text-[9px] font-inter font-extrabold tracking-widest uppercase text-primary">#1 Match</span>
+                return (
+                <div key={supplier.id} className="bg-white rounded-[20px] border border-gray-100 p-6 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex justify-between items-start mb-2">
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-[14px] font-bold text-gray-900 font-inter">{supplier.name}</h3>
+                      {supplier.verified && (
+                        <span className="bg-[#DCFCE7] text-[#166534] text-[10px] font-bold px-2 py-0.5 rounded-md">Terverifikasi</span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-1 bg-[#FEF9C3] px-2 py-0.5 rounded-md">
+                      <span className="material-symbols-outlined text-[12px] text-[#EAB308]" style={{fontVariationSettings: "'FILL' 1"}}>star</span>
+                      <span className="text-[12px] font-bold text-gray-900 font-inter">{supplier.rating}</span>
+                    </div>
                   </div>
-                  <div className="flex flex-col gap-4 mt-1">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-surface-high flex items-center justify-center">
-                         <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>agriculture</span>
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-manrope font-bold text-on-surface">Nordic Grain Alliance</h4>
-                        <div className="flex items-center gap-1.5 mt-0.5">
-                          <span className="material-symbols-outlined text-[14px] text-secondary" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                          <span className="text-[10px] font-inter font-bold text-on-surface-variant">4.9 · 152 Contracts</span>
-                        </div>
-                      </div>
+                  <div className="flex items-center gap-1 text-gray-500 mb-6">
+                    <span className="material-symbols-outlined text-[14px]">location_on</span>
+                    <span className="text-[11px] font-medium font-inter">{supplier.loc}</span>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                      <div className="text-[11px] text-gray-500 font-medium mb-1 font-inter">Stok Tersedia</div>
+                      <div className="text-[15px] font-bold text-gray-900 font-manrope">{supplier.qty} kg</div>
                     </div>
-                    <div className="flex gap-2">
-                       <button className="flex-1 py-1.5 bg-primary text-surface-lowest text-[11px] font-inter font-bold rounded-md hover:opacity-90 transition-opacity shadow-sm">View</button>
-                       <button className="flex-1 py-1.5 bg-surface-lowest border border-outline-variant text-on-surface text-[11px] font-inter font-bold rounded-md hover:bg-surface-low transition-colors shadow-sm">Contact</button>
+                    <div>
+                      <div className="text-[11px] text-gray-500 font-medium mb-1 font-inter">Harga per kg</div>
+                      <div className="text-[15px] font-bold text-[#166534] font-manrope">Rp {supplier.price.toLocaleString('id-ID')}</div>
                     </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between mt-auto pt-5 border-t border-gray-100">
+                    <div className="text-[11px] text-gray-500 font-medium font-inter">
+                      Est. total: <span className="font-bold text-gray-900">Rp {estSupplierTotal.toLocaleString('id-ID')}</span>
+                    </div>
+                    <button className="bg-[#1A56DB] hover:bg-blue-700 text-white text-[12px] font-bold px-4 py-2 rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer font-inter shadow-sm">
+                      <span className="material-symbols-outlined text-[16px]">shopping_cart</span>
+                      Request
+                    </button>
                   </div>
                 </div>
-                
-              </div>
+              )})}
+              
             </div>
           </div>
           
         </div>
-      </section>
-
+      </div>
     </div>
   );
 };
